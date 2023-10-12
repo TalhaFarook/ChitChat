@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <title>Login</title>
+    </head>
+    <body>
+        <!-- Display the login form -->
+        <h1>Login</h1>
+
+        <form method="post">
+            <!-- Include the CSRF token for security -->
+            {% csrf_token %}
+            
+            <!-- Display the form fields -->
+            {{ form.as_p }}
+            
+            <button type="submit">Login</button><br>
+            
+            <!-- Display a message if login fails -->
+            {% if login_failed %}
+                <p>Wrong credentials! Please try again.</p>
+            {% endif %}
+            
+            <p>No account? <a href = "{% url 'user:signup' %}">Sign Up</a></p>
+        </form>
+    </body>
+</html>

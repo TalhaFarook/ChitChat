@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Group Inbox</title>
+</head>
+<body>
+    <h1>Group Inbox</h1>
+    <!-- Check if there is any group with messages -->
+    {% if groups %}
+        {% for id, name in groups %}
+        <!-- Loop through the list of groups with messages -->
+        <h3>
+            <!-- Display the group's name as a clickable link -->
+            <a href="{% url 'chat:group_messages' id %}">{{ name }}</a>
+        </h3>
+        {% endfor %}
+    {% else %}
+        <!-- If no groups with messages, show Empty! -->
+        <h3>Empty!</h3>
+    {% endif %}
+    
+    <!-- Provide a link to the user's dashboard -->
+    <a href="{% url 'user:dashboard' %}">Dashboard</a>
+</body>
+</html>

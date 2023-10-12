@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <title>Sign Up</title>
+    </head>
+    <body>
+        <!-- Display the sign-up form -->
+        <h1>Sign Up</h1>
+
+        <form method="POST">
+            <!-- Include the CSRF token for security -->
+            {% csrf_token %}
+            
+            <!-- Display the form fields -->
+            {{ form.as_p }}
+            
+            <button type="submit">Sign Up</button>
+            
+            <p>Have an account? <a href="{% url 'user:login' %}">Log In</a></p>
+        </form>
+    </body>
+</html>

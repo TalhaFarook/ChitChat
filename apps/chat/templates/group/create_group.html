@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create a Group</title>
+</head>
+<body>
+    <h1>Create a Group</h1>
+    
+    <form method="post">
+        <!-- Include CSRF token for form security -->
+        {% csrf_token %}
+        
+        <!-- Render form fields as paragraphs -->
+        {{ form.as_p }}
+        
+        <!-- Submit button for creating a group -->
+        <button type="submit">Create Group</button>
+    </form>
+    
+    <!-- If the group is created successfully, display a success message -->
+    {% if message_status == 1 %}
+        <p>Group created successfully!</p>
+    {% endif %}
+    
+    <!-- Link to go back to the user's dashboard -->
+    <br>
+    <a href="{% url 'user:dashboard' %}">Dashboard</a>
+</body>
+</html>
