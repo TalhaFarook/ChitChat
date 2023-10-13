@@ -19,4 +19,10 @@ urlpatterns = [
 
     # URL pattern for user logout
     path('logout/', views.logout_view, name='logout'),
+
+    # URL pattern for forget password
+    path('forget-password/', views.forget_password_view, name='forget-password'),
+
+    # URL pattern for change password
+    path('change-password/', views.change_password_view, name='change-password'),
 ]

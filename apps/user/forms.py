@@ -25,3 +25,16 @@ class LoginForm(forms.Form):
     # Specify required fields for log in
     username = forms.CharField(max_length=12)
     password = forms.CharField(widget=forms.PasswordInput)
+
+class ForgetPasswordForm(forms.Form):
+    email = forms.EmailField()
+
+class ChangePasswordForm(forms.Form):
+    # Specify required fields for changing password
+    old_password = forms.CharField(widget=forms.PasswordInput, label='Old password')
+    new_password = forms.CharField(widget=forms.PasswordInput, label='New password')
+
+
+
+
+

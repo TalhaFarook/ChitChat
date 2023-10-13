@@ -14,8 +14,10 @@
             {{ form.as_p }}
             
             <button type="submit">Sign Up</button>
-            
-            <p>Have an account? <a href="{% url 'user:login' %}">Log In</a></p>
         </form>
+
+    <p>Have an account? <a href="{% url 'user:login' %}">Log In</a></p>
+    <p>Forgot Password? <a href="{% url 'user:forget-password' %}">Forget Password</a></p>
+
     </body>
 </html>

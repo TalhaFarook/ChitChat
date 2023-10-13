@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import SignUpForm, LoginForm
+from .forms import *
 from django.contrib.auth import authenticate, login, logout
 from apps.chat.models import OneChat
 from django.contrib.auth.decorators import login_required
@@ -79,3 +79,44 @@ def login_view(request):
         form = LoginForm()
 
     return render(request, 'login_form.html', {'form': form, 'login_failed': False})
+
+def forget_password_view(request):
+    if request.method == 'POST':
+        form = ForgetPasswordForm(request.POST)
+        if form.is_valid():
+            if form.cleaned_data['email']:
+                user_obj = UserTable.objects.filter(email=form.cleaned_data['email'])
+
+                if user_obj:
+                    return render(request, 'forget_password_form.html', {'form': form, 'forget_failed': 2})
+                else:
+                    return render(request, 'forget_password_form.html', {'form': form, 'forget_failed': 1})
+    else:
+        form = ForgetPasswordForm()
+
+    return render(request, 'forget_password_form.html', {'form': form, 'forget_failed': 0})
+
+# View for change password
+@login_required
+def change_password_view(request):
+    if request.method == 'POST':
+        form = ChangePasswordForm(request.POST)
+        if form.is_valid():
+            old_password = form.cleaned_data['old_password']
+
+            # Checking if user exists by trying to log in
+            user = authenticate(request, username=request.user, password=old_password)
+
+            if user:
+                user.set_password(form.cleaned_data['new_password'])
+                user.save()
+
+                # Take to the login page if message is changed
+                return redirect('user:login')
+            
+            else:
+                return render(request, 'change_password_form.html', {'form': form, 'change_failed': True}) 
+    else:
+        form = ChangePasswordForm()
+
+    return render(request, 'change_password_form.html', {'form': form, 'change_failed': False})  
