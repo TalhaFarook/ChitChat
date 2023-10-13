@@ -61,8 +61,8 @@ DATABASES = {
         'NAME': 'week6_db',
         'USER': 'root',
         'PASSWORD': 'my123SQL$',
-        'HOST': 'localhost',  # Use the appropriate host if it's not localhost
-        'PORT': '3308',  # Use the appropriate port if needed
+        'HOST': 'localhost',  
+        'PORT': '3308', 
     }
 }
 
@@ -81,6 +81,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Custom user model
 AUTH_USER_MODEL = 'user.UserTable'
 
 LANGUAGE_CODE = 'en-us'

@@ -158,7 +158,7 @@ def create_group_view(request):
 # This view will handle the inputs from the message form for group messages
 def send_group_message_view(request):
     if request.method == 'POST':
-        form = GroupMessageForm(request.POST, request.FILES)
+        form = GroupMessageForm(request.POST, request.user, request.FILES)
         if form.is_valid():
             message = form.save(commit=False)
             group = Group.objects.get(pk=message.group_id)
@@ -185,7 +185,7 @@ def send_group_message_view(request):
 
             return render(request, 'group/send_group_message.html', {'form': form, 'message_status': 1})
     else:
-        form = GroupMessageForm()
+        form = GroupMessageForm(request.user)
 
     return render(request, 'group/send_group_message.html', {'form': form, 'message_status': 0})
 
@@ -196,8 +196,6 @@ def group_inbox_view(request):
 
     # Retrieve groups for which the user is a receiver
     groups = Group.objects.filter(receivers=user)
-
-    print(groups)
 
     if groups:
         ids, names = [], []
@@ -223,7 +221,10 @@ def group_messages_view(request, group_id):
     # Retrieve the group name based on the group ID
     group_name = get_object_or_404(Group, group_id=group_id).group_name
 
+    group = Group.objects.get(group_id=group_id)  
+    receivers_list = list(group.receivers.all())
+
     # Retrieve the user's ID
     id = request.user.id
 
-    return render(request, 'group/group_messages.html', {'groupchat_obj': groupchat_obj, 'group_name': group_name, 'id': id})
+    return render(request, 'group/group_messages.html', {'groupchat_obj': groupchat_obj, 'group_name': group_name, 'id': id, 'receivers_list': receivers_list})

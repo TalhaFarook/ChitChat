@@ -17,7 +17,13 @@ class GroupCreationForm(forms.ModelForm):
 
 # Form for sending a message to a group
 class GroupMessageForm(forms.ModelForm):
+    def __init__(self, user, *args, **kwargs):
+        super(GroupMessageForm, self).__init__(*args, **kwargs)
+        # Filter users on the basis of group member
+        self.fields['group'].queryset = Group.objects.filter(receivers=user)
+
     class Meta:
         model = GroupChat
         # Specify required fields for sending a group message
-        fields = ['group', 'message', 'image']  
+        fields = ['group', 'message', 'image']
+

@@ -23,5 +23,5 @@ class SignUpForm(forms.ModelForm):
 # Form for user login
 class LoginForm(forms.Form):
     # Specify required fields for log in
-    username = forms.CharField(max_length=100)
+    username = forms.CharField(max_length=12)
     password = forms.CharField(widget=forms.PasswordInput)

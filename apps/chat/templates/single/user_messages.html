@@ -37,6 +37,9 @@
         {% for message in messages %}
             <!-- Current user will see their messages in black and on the left, while the receiver messages will be displayed on the right and in blue -->
             <div class="{% if message.sender_id == id %}received{% elif message.sender_id != id %}sent{% endif %}">
+                {% if message.image %}
+                    <img src="{{ message.image.url }}" alt="Message Image"><br>
+                {% endif %}
                 {{ message.message }} <br>
                 {{ message.message_time }}
 
@@ -50,10 +53,6 @@
                     {% elif message.is_sent == 1 %}
                         Sent
                     {% endif %}
-                {% endif %}
-                
-                {% if message.image %}
-                    <img src="{{ message.image.url }}" alt="Message Image">
                 {% endif %}
             </div>
         {% endfor %}

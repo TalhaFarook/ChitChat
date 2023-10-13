@@ -8,7 +8,7 @@ class OneChat(models.Model):
     message_time = models.DateTimeField(default=timezone.now)  # Timestamp of the message
     receiver_id = models.ForeignKey(UserTable, on_delete=models.CASCADE, related_name='user_chat')  # User who sent the message and is the foreign key mapping to the UserTable's id field.
     sender_id = models.PositiveIntegerField()  # User ID of the message receiver
-    image = models.ImageField(upload_to='', blank=True, null=True)  # Image field
+    image = models.ImageField(upload_to='', blank=True, null=True, max_length=255)  # Image field
     message = models.TextField()  # Text content of the message
     is_sent = models.BooleanField(default=False)  # Indicates if the message has been sent
     is_read = models.BooleanField(default=False)  # Indicates if the message has been read
@@ -29,7 +29,7 @@ class Group(models.Model):
 class GroupChat(models.Model):
     message_id = models.AutoField(primary_key=True)
     message_time = models.DateTimeField(default=timezone.now)
-    image = models.ImageField(upload_to='', blank=True, null=True)  # Image field
+    image = models.ImageField(upload_to='', blank=True, null=True, max_length=255)  # Image field
     sender_id = models.ForeignKey(UserTable, on_delete=models.CASCADE, related_name='group_chats')
-    group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name='messages')  # Group to which the message belongs
+    group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name='group_messages')  # Group to which the message belongs
     message = models.TextField()  # Text content of the message

@@ -47,17 +47,17 @@ def dashboard_view(request):
             message.is_delivered = True
             message.save()
 
-    return render(request, 'dashboard.html', {'id': request.user.id, 'username': request.user.username})
+    return render(request, 'dashboard.html', {'username': request.user.username})
 
 # View for user login
 def login_view(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
-            email = form.cleaned_data['username']
+            username = form.cleaned_data['username']
             password = form.cleaned_data['password']
 
-            user = authenticate(request, username=email, password=password)
+            user = authenticate(request, username=username, password=password)
             if user is not None:
                 user.current_active = 1
                 user.save()
