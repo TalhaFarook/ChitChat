@@ -1,23 +1,17 @@
-<html>
-    <head>
-        <title>Sign Up</title>
-    </head>
-    <body>
-        <!-- Display the sign-up form -->
-        <h1>Sign Up</h1>
+{% extends "base.html" %}
 
-        <form method="POST">
-            <!-- Include the CSRF token for security -->
-            {% csrf_token %}
-            
-            <!-- Display the form fields -->
-            {{ form.as_p }}
-            
-            <button type="submit">Sign Up</button>
-        </form>
+{% block title %}Sign Up{% endblock %}
 
+{% block header %}Sign Up{% endblock %}
+
+{% block form %}  
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>    
+{% endblock %}
+
+{% block links %}
     <p>Have an account? <a href="{% url 'user:login' %}">Log In</a></p>
     <p>Forgot Password? <a href="{% url 'user:forget-password' %}">Forget Password</a></p>
+{% endblock %}
 
-    </body>
-</html>

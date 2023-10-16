@@ -4,20 +4,18 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='OneChat',
+            name="OneChat",
             fields=[
-                ('message_id', models.AutoField(primary_key=True, serialize=False)),
-                ('sender_id', models.PositiveIntegerField()),
-                ('receiver_id', models.PositiveIntegerField()),
-                ('message', models.TextField()),
+                ("message_id", models.AutoField(primary_key=True, serialize=False)),
+                ("sender_id", models.PositiveIntegerField()),
+                ("receiver_id", models.PositiveIntegerField()),
+                ("message", models.TextField()),
             ],
         ),
     ]

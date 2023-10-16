@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import *
 
-# Register the UserTable model with the Django admin site.
+from .models import UserTable
+
 admin.site.register(UserTable)

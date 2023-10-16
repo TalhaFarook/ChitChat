@@ -1,27 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inbox</title>
-</head>
-<body>
-    <h1>Inbox</h1>
-    <!-- Check if there are users with messages -->
+{% extends "base.html" %}
+
+{% block title %}Inbox{% endblock %}
+
+{% block header %}Inbox{% endblock %}
+
+{% block links %}
     {% if users_names %}
         {% for id, name in users_names %}
-        <!-- Loop through the list of users with messages -->
-        <h3>
-            <!-- Display the user's name as a clickable link -->
-            <a href="{% url 'chat:user_messages' id %}">{{ name }}</a>
-        </h3>
+            <h3><a href="{% url 'chat:user_messages' id %}">{{ name }}</a></h3>
         {% endfor %}
     {% else %}
-        <!-- If no users with messages, show Empty! -->
         <h3>Empty!</h3>
     {% endif %}
-
-    <!-- Provide a link to the user's dashboard -->
     <a href="{% url 'user:dashboard' %}">Dashboard</a>
-</body>
-</html>
+{% endblock %}
+

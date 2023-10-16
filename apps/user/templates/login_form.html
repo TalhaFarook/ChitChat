@@ -1,27 +1,20 @@
-<html>
-    <head>
-        <title>Login</title>
-    </head>
-    <body>
-        <!-- Display the login form -->
-        <h1>Login</h1>
+{% extends "base.html" %}
 
-        <form method="post">
-            <!-- Include the CSRF token for security -->
-            {% csrf_token %}
-            
-            <!-- Display the form fields -->
-            {{ form.as_p }}
-            
-            <button type="submit">Login</button><br>
-            
-            <!-- Display a message if login fails -->
-            {% if login_failed %}
-                <p>Wrong credentials! Please try again.</p>
-            {% endif %}
-            
-            <p>No account? <a href = "{% url 'user:signup' %}">Sign Up</a></p>
-            <p>Forgot Password? <a href="{% url 'user:forget-password' %}">Forget Password</a></p><br>
-        </form>
-    </body>
-</html>
+{% block title %}Login{% endblock %}
+
+{% block header %}Login{% endblock %}
+
+{% block form %}  
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>    
+{% endblock %}
+
+{% block links %}
+    {% if login_failed %}
+            <p>Wrong credentials! Please try again.</p>
+    {% endif %}
+        
+    <p>No account? <a href="{% url 'user:signup' %}">Sign Up</a></p>
+    <p>Forgot Password? <a href="{% url 'user:forget-password' %}">Forget Password</a></p>
+{% endblock %}
