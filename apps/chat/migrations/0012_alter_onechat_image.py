@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('chat', '0011_alter_onechat_image'),
+        ("chat", "0011_alter_onechat_image"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='onechat',
-            name='image',
-            field=models.ImageField(upload_to='images/'),
+            model_name="onechat",
+            name="image",
+            field=models.ImageField(upload_to="images/"),
         ),
     ]
