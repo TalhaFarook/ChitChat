@@ -4,20 +4,23 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('chat', '0019_groupchat_image'),
+        ("chat", "0019_groupchat_image"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='groupchat',
-            name='image',
-            field=models.ImageField(blank=True, max_length=500, null=True, upload_to=''),
+            model_name="groupchat",
+            name="image",
+            field=models.ImageField(
+                blank=True, max_length=500, null=True, upload_to=""
+            ),
         ),
         migrations.AlterField(
-            model_name='onechat',
-            name='image',
-            field=models.ImageField(blank=True, max_length=255, null=True, upload_to=''),
+            model_name="onechat",
+            name="image",
+            field=models.ImageField(
+                blank=True, max_length=255, null=True, upload_to=""
+            ),
         ),
     ]

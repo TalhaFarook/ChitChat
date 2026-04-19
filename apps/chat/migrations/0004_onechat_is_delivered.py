@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('chat', '0003_onechat_is_read_onechat_is_sent_onechat_message_time'),
+        ("chat", "0003_onechat_is_read_onechat_is_sent_onechat_message_time"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='onechat',
-            name='is_delivered',
+            model_name="onechat",
+            name="is_delivered",
             field=models.BooleanField(default=False),
         ),
     ]

@@ -1,30 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Send Message</title>
-</head>
-<body>
-    <h1>Send Message</h1>
-    <form method='post' enctype="multipart/form-data">
-        <!-- Include the CSRF token for security -->
-        {% csrf_token %}
-        <!-- Render the form fields -->
-        {{ form.as_p }}
-        <button type='submit'>
-            Send Message
-        </button><br>
-        <!-- Display an error message if user is sending a message back to themself or user doesn't exist -->
-        <!-- Link to go back to the inbox page -->
-    </form>
+{% extends "base.html" %}
 
-    <!-- Display response message -->
+{% block title %}Send Message{% endblock %}
+
+{% block header %}Send Message{% endblock %}
+
+{% block form %}  
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type='submit'>Send Message</button>   
+{% endblock %}
+
+{% block links %}
     {% if message_status == 1 %}
         <p>You can't message yourself. Try again!</p>
     {% elif message_status == 2 %}
         <p>Message sent successfully!</p>
     {% endif %}
-    <p><a href="{% url 'user:dashboard' %}">Back</a></p>
-</body>
-</html>
+    <p><a href="{% url 'user:dashboard' %}">Dashboard</a></p>
+{% endblock %}
+

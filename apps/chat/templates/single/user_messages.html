@@ -1,50 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ username }}</title>
-</head>
+{% load static %}
 
-<style>
-    .message-container {
-        display: flex;
-        flex-direction: column;
-    }
+{% block title %}{{ username }}{% endblock %}
 
-    .sent {
-        align-self: flex-start;
-        border: 1px solid black; /* Black border for sent messages */
-        padding: 2px;
-        margin-bottom: 2px;
-    }
+{% block header %}{{ username }}{% endblock %}
 
-    .received {
-        align-self: flex-end;
-        border: 1px solid blue; /* Blue border for received messages */
-        padding: 2px;
-        margin-bottom: 2px;
-    }
-</style>
-
-<body>
-    <h1>{{ username }}</h1>
-    <p>{{ active }}</p>
-    
+{% block links %}
+    {{ active }}
     <div class="message-container">
-        <!-- Loop through the list of messages -->
         {% for message in messages %}
-            <!-- Current user will see their messages in black and on the left, while the receiver messages will be displayed on the right and in blue -->
             <div class="{% if message.sender_id == id %}received{% elif message.sender_id != id %}sent{% endif %}">
                 {% if message.image %}
                     <img src="{{ message.image.url }}" alt="Message Image"><br>
                 {% endif %}
                 {{ message.message }} <br>
-                {{ message.message_time }}
+                {{ message.message_time }} <br>
 
-                <!-- Sent messages will show if the message is read, if not then show delivered when user logs in but doesn't view the message, and if not then show the status that the message is sent. -->
-                <br>
                 {% if message.sender_id != id %}
                     {% if message.is_read == 1 %}
                         Read
@@ -56,14 +28,9 @@
                 {% endif %}
             </div>
         {% endfor %}
-        <br>
     </div>
-    
-    <br>
-    <!-- Link to go back to the inbox page -->
-    <a href="{% url 'chat:inbox' %}">Back</a>
-    <br>
-    <!-- Link to go back to the user dashboard page -->
-    <a href="{% url 'user:dashboard' %}">Dashboard</a>
-</body>
-</html>
+
+    <p><a href="{% url 'chat:inbox' %}">Back</a></p>
+    <p><a href="{% url 'user:dashboard' %}">Dashboard</a></p>
+{% endblock %}
+

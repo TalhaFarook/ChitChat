@@ -1,0 +1,18 @@
+.message-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.sent {
+    align-self: flex-start;
+    border: 1px solid black; 
+    padding: 2px;
+    margin-bottom: 2px;
+}
+
+.received {
+    align-self: flex-end;
+    border: 1px solid blue;
+    padding: 2px;
+    margin-bottom: 2px;
+}
